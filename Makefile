@@ -53,7 +53,7 @@ $(BINDATA):
 	$(GO_BINDATA) $(BINDATA_FLAGS) -o=$@ server/data/...
 
 lint:
-	@npm run eslint || true
+	@npm run lint || true
 	@golint $(GO_FILES) || true
 
 install:
