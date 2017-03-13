@@ -14,7 +14,6 @@ config.entry = {
 };
 
 config.plugins.push(
-  new webpack.optimize.OccurenceOrderPlugin(),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoErrorsPlugin()
 );
