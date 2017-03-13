@@ -1,10 +1,8 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
-import { match, RouterContext } from 'react-router';
+import { StaticRouter } from 'react-router'
 import Helmet from 'react-helmet';
-import createRoutes from './routes';
-import { createStore, setAsCurrentStore } from '../store';
+import App from 'Components/app';
 
 /**
  * Handle HTTP request at Golang server
@@ -24,11 +22,33 @@ export default function (options, cbk) {
     redirect: null
   };
 
-  const store = createStore();
-  setAsCurrentStore(store);
-
   try {
-    match({ routes: createRoutes({store, first: { time: false }}), location: options.url }, (error, redirectLocation, renderProps) => {
+    const context = {}
+    result.app = renderToString(
+       <StaticRouter
+          location={options.url}
+          context={context}
+        >
+          <App/>
+        </StaticRouter>
+    );
+
+    if (context.url) {
+      result.redirect = context.url;
+    }
+
+    const { title, meta } = Helmet.rewind();
+    result.title = title.toString();
+    result.meta = meta.toString();
+
+  } catch (e) {
+    result.error = e;
+    return cbk(result);
+  }
+  return cbk(result);
+}
+
+/*match({ routes: createRoutes({store, first: { time: false }}), location: options.url }, (error, redirectLocation, renderProps) => {
       try {
         if (error) {
           result.error = error;
@@ -51,9 +71,4 @@ export default function (options, cbk) {
         result.error = e;
       }
       return cbk(result);
-    });
-  } catch (e) {
-    result.error = e;
-    return cbk(result);
-  }
-}
+    });*/

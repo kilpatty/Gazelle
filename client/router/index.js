@@ -1,11 +1,9 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { Router, browserHistory } from 'react-router';
-import { Provider } from 'react-redux';
 import toString from './toString';
 import { Promise } from 'when';
-import createRoutes from './routes';
-import { createStore, setAsCurrentStore } from '../store';
+import { BrowserRouter } from 'react-router-dom'
+import App from 'Components/app';
+import ReactDOM from 'react-dom'
 
 
 export function run() {
@@ -14,16 +12,12 @@ export function run() {
   // init fetch polyfill
   window.self = window;
   require('whatwg-fetch');
-
-  const store = createStore(window['--app-initial']);
-  setAsCurrentStore(store);
-
-  render(
-    <Provider store={store} >
-      <Router history={browserHistory}>{createRoutes({store, first: { time: true }})}</Router>
-    </Provider>,
-    document.getElementById('app')
-  );
+  
+  ReactDOM.render((
+    <BrowserRouter>
+      <App/>
+    </BrowserRouter>
+  ), document.getElementById('app'))
 
 }
 
