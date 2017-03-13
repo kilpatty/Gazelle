@@ -15,8 +15,19 @@ config.entry = {
 
 config.plugins.push(
   new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoErrorsPlugin()
+  new webpack.NoErrorsPlugin(),
+  new webpack.NamedModulesPlugin()
+    // prints more readable module names in the browser console on HMR updates
 );
+
+config.module.rules.push(
+  {
+    enforce: 'pre',
+    test: /\.js$/,
+    loader: 'eslint-loader',
+    include: /client/,
+  }
+)
 
 config.devtool = 'cheap-module-eval-source-map';
 

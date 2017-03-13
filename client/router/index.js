@@ -1,9 +1,9 @@
 import React from 'react';
 import toString from './toString';
 import { Promise } from 'when';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom';
 import App from 'Components/app';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
 
 
 export function run() {
@@ -17,7 +17,7 @@ export function run() {
     <BrowserRouter>
       <App/>
     </BrowserRouter>
-  ), document.getElementById('app'))
+  ), document.getElementById('app'));
 
 }
 
