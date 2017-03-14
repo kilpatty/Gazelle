@@ -1,3 +1,7 @@
 FROM golang:alpine
 
 RUN apk add --no-cache nodejs make
+
+COPY . /go/src/app
+
+WORKDIR /go/src/app
