@@ -2,7 +2,7 @@ FROM golang:alpine
 
 RUN apk add --no-cache nodejs make curl curl-dev git
 
-RUN npm install -g eslint webpack
+RUN npm install -g eslint
 
 RUN go get -u github.com/golang/lint/golint
 

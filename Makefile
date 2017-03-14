@@ -30,7 +30,7 @@ $(GO_BINDATA):
 	go install $(IMPORT_PATH)/vendor/github.com/jteeuwen/go-bindata/...
 
 $(BUNDLE): $(APP)
-	@$(NODE_BIN)/webpack --progress --colors --bail
+	@npm build
 
 $(TARGET): $(BUNDLE) $(BINDATA)
 	@go build -ldflags '$(LDFLAGS)' -o $@ $(IMPORT_PATH)/server

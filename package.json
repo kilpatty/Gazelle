@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
+    "build": "webpack --progress --colors --bail",
     "lint:js": "eslint client",
     "lint:css": "stylelint \"client/**/*.css\"",
     "lint": "npm run lint:js && npm run lint:css",
