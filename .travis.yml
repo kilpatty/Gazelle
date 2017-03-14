@@ -1,0 +1,20 @@
+sudo: required
+
+services:
+  - docker
+
+script:
+  - docker build -t go-starter-kit -f build/Dockerfile.build .
+  - docker run go-starter-kit /bin/sh -c "make install;"
+
+# install:
+#   - npm install -g codecov
+#   - npm install
+# script:
+# - npm run lint
+# - npm run test
+# - npm run coverage
+# - codecov
+
+notifications:
+  email: false
