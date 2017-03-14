@@ -17,7 +17,7 @@ export default class Homepage extends Component {
         ]} />
       <h1 className={example}>
         Hot Reloadable <br />
-        Golang + React + Redux + Css-Modules
+        Golang + React + Redux + Css-Module test
         <br />Isomorphic Starter Kit</h1>
       <br />
       <p className={p}>

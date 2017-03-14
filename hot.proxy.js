@@ -8,6 +8,7 @@ var port = +(process.env.PORT || 5000);
 
 config.entry = {
   bundle: [
+    'react-hot-loader/patch',
     'webpack-hot-middleware/client?http://localhost:' + port,
     config.entry.bundle
   ]
@@ -15,7 +16,7 @@ config.entry = {
 
 config.plugins.push(
   new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoErrorsPlugin(),
+  new webpack.NoEmitOnErrorsPlugin(),
   new webpack.NamedModulesPlugin()
     // prints more readable module names in the browser console on HMR updates
 );
