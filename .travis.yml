@@ -16,5 +16,5 @@ script:
 # - npm run coverage
 # - codecov
 
-notifications:
-  email: false
+# notifications:
+#   email: false
