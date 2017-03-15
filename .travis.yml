@@ -1,26 +1,19 @@
 sudo: required
-
 services:
-  - docker
-
+- docker
 script:
-  - docker build -t go-starter-kit-compile -f build/Dockerfile.build .
-  - docker run --name appBuilder go-starter-kit-compile /bin/sh -c "make lint;"
-  # Copy the compiled binary out of the container
-  - docker cp appBuilder:/go/bin/app .
-  - docker build -t go-starter-kit -f build/Dockerfile .
-
-
-# install:
-#   - npm install -g codecov
-#   - npm install
-# script:
-# - npm run lint
-# - npm run test
-# - npm run coverage
-# - codecov
-
+- export REPO=skilgarriff/go-starter-ki
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH
+  ; fi`
+- docker build -t go-starter-kit-compile -f build/Dockerfile.build .
+- docker run --name appBuilder go-starter-kit-compile /bin/sh -c "make lint;"
+- docker cp appBuilder:/go/bin/app .
+- docker build -t $REPO:$COMMIT -f build/Dockerfile .
+after_success:
+- docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+- docker tag $REPO:$COMMIT $REPO:$TAG
+- docker push $REPO
 notifications:
   email: false
-
-# ./bin/app run -c production > /dev/null
+  slack:
+    secure: R7w8XRQS2GlXMNywJshR61EWsRqTeS0bOLkiH6yX8AcOelaa1tL4xPFUEws1OgUaRj1hdRuDXRcZUOsGIRapPyHES81uWl0X2pi4cD9i54CsUPqS+DeZhlwqiYdO/gCxsXddKrJkzRScOEKdk/j4AXC5hhyxcO2hTdbRYR5+geTZ3/0W9nCDNZBewA2pr75PRx0kesWesvxPVPEY+EIX+NPQ6sh3BEkzL2Nn6uPvghKeXwPp0RuoJCuziJehKvEGAg7BY+gz6CZpgavhK7eIsoIb+aj9yssygy9Ka8mzJrQmm5N42hsZ2UffbM8aXAQNtVlzkCdaqE993zIlC2luRJnrDVibaWLVP1LFdKW/+yACQ4zogYZdLUYxn7rBmj9JQ1kFZEULxzpdt/sFny3biV7yq/YqzpfGE7kA6XI9H33jgvrp3rT8Dvd9Wy7P+Kt7EXM6+TvKMX3nKIvm7qnAk5Bts+RCo6AOkQNOIfhCfMpdhQCew6sgNtxtzREbu/0HVzl40sbFFqs7HqYsO5byL0R7EdrcrFW3QTYG1tuMGibzWk4IS0LmPyuAkhwZE4rh4+zTmrjfu1XUeRPjOKwQC8WFPR1n1vvwNLYa9Xxh4FEOP2vJ7mkHNijuNnGT4/i5lYesTY7/wbmXhsM1se48Bn7FvAZdBH8Tph+/m1SttNo=
