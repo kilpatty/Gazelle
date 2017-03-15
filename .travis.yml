@@ -5,9 +5,7 @@ services:
 
 script:
   - docker build -t go-starter-kit -f build/Dockerfile.build .
-  - docker run go-starter-kit /bin/sh -c "make install;"
   - docker run go-starter-kit /bin/sh -c "make lint;"
-  - docker run go-starter-kit /bin/sh -c "NODE_ENV=production make build"
 
 # install:
 #   - npm install -g codecov
@@ -18,5 +16,7 @@ script:
 # - npm run coverage
 # - codecov
 
-# notifications:
-#   email: false
+notifications:
+  email: false
+
+# ./bin/app run -c production > /dev/null
