@@ -5,7 +5,7 @@ services:
 
 script:
   - docker build -t go-starter-kit-compile -f build/Dockerfile.build .
-  - docker run --name appBuilder go-starter-kit /bin/sh -c "make lint;"
+  - docker run --name appBuilder go-starter-kit-compile /bin/sh -c "make lint;"
   # Copy the compiled binary out of the container
   - docker cp appBuilder:/go/bin/app .
   - docker build -t go-starter-kit -f build/Dockerfile .
