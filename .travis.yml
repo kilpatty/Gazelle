@@ -7,6 +7,7 @@ script:
   - docker build -t go-starter-kit -f build/Dockerfile.build .
   - docker run go-starter-kit /bin/sh -c "make lint;"
 
+
 # install:
 #   - npm install -g codecov
 #   - npm install
