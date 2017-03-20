@@ -2,13 +2,13 @@ sudo: required
 services:
 - docker
 script:
-- export REPO=skilgarriff/go-starter-kit
+- export REPO=skilgarriff/gazelle
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH;
   fi`
-- docker build -t go-starter-kit-compile -f build/Dockerfile.build .
-- docker run --name appBuilder go-starter-kit-compile /bin/sh -c "make lint;"
+- docker build -t gazelle-compile -f ci/Dockerfile.build .
+- docker run --name appBuilder gazelle-compile /bin/sh -c "make lint;"
 - docker cp appBuilder:/go/bin/app .
-- docker build -t $REPO -f build/Dockerfile .
+- docker build -t $REPO -f ci/Dockerfile .
 after_success:
 - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
 - docker tag $REPO $REPO:$TAG
@@ -16,4 +16,5 @@ after_success:
 notifications:
   email: false
   slack:
-    secure: R7w8XRQS2GlXMNywJshR61EWsRqTeS0bOLkiH6yX8AcOelaa1tL4xPFUEws1OgUaRj1hdRuDXRcZUOsGIRapPyHES81uWl0X2pi4cD9i54CsUPqS+DeZhlwqiYdO/gCxsXddKrJkzRScOEKdk/j4AXC5hhyxcO2hTdbRYR5+geTZ3/0W9nCDNZBewA2pr75PRx0kesWesvxPVPEY+EIX+NPQ6sh3BEkzL2Nn6uPvghKeXwPp0RuoJCuziJehKvEGAg7BY+gz6CZpgavhK7eIsoIb+aj9yssygy9Ka8mzJrQmm5N42hsZ2UffbM8aXAQNtVlzkCdaqE993zIlC2luRJnrDVibaWLVP1LFdKW/+yACQ4zogYZdLUYxn7rBmj9JQ1kFZEULxzpdt/sFny3biV7yq/YqzpfGE7kA6XI9H33jgvrp3rT8Dvd9Wy7P+Kt7EXM6+TvKMX3nKIvm7qnAk5Bts+RCo6AOkQNOIfhCfMpdhQCew6sgNtxtzREbu/0HVzl40sbFFqs7HqYsO5byL0R7EdrcrFW3QTYG1tuMGibzWk4IS0LmPyuAkhwZE4rh4+zTmrjfu1XUeRPjOKwQC8WFPR1n1vvwNLYa9Xxh4FEOP2vJ7mkHNijuNnGT4/i5lYesTY7/wbmXhsM1se48Bn7FvAZdBH8Tph+/m1SttNo=
+    rooms:
+      secure: b4rcrAWQ27Gdu5lJVfrvtoHd0Bq7L8IHcjavsTpAFHM6FZ8KfF5UfWJtYouPv5AXchovCC9FnU14WsFKOTbri87Ao5BvjG2b0q/plc9MnbgVlIswzO2f1o22ET9JRXW5ZxHOP6y+5h5aErhIgP6piN2H70aWauygM9IXZ++b6fC+3YZTe+ukcPg+GCAH+L19h8DQBeuO7Fp0EMdCvXKehLoRVptYvlnG8vWHXIhslrY3NY6NKWRfKWyjkZHU5BPAv/e7kOZNvoFWntpLG/HsmWQZjheVh0/AD3/+T7Qa54XH9uuCLZvHTRbFRiUvL1DbuZhStpEE8uL6hNaeoa/bIB21oue55lHE5EM/aL/u6lVoN1h51ENC2q0omRaZNwDYA8zVSiSAvaxhFc7evPbhmXG2Rh+YkhcAQO7EbLVWJqx/kvVV04YQf3Z4VV0wrTpX2/gUgnqJmuhHvG7yYF8ovEAeFFs9k28XYJGcxzP+NF0wehnYfeRlESBqEnfF05me6S8L9ng/0qa/YtswyedhzRbt6fyC48/fQCNUC8zdcHtSbM45WVEQyvd7N9OO70OBjJw2o5oowtB4ydZqHGQGRAUvBN5Lg0u1s8zh0FGlwdMC7Rr1/qIUGHCel01e/9P5zPS9p9hypsttT6rBvDS8fqsWzk3HbJm07Cyec2fDOgA=
