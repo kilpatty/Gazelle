@@ -10,16 +10,16 @@ import Usage from 'Components/usage';
 export default class App extends Component {
 
   render() {
-    return <div>
-      <Helmet title='Go + React + Redux = rocks!' />
+    return (<div>
+      <Helmet title="Go + React + Redux = rocks!" />
 
       <Switch>
-        <Route exact path="/" component={HomePage}/>
-        <Redirect from="/docs" to="/usage"/>
-        <Route path="/usage" component={Usage}/>
-        <Route component={NotFound}/>
+        <Route exact path="/" component={HomePage} />
+        <Redirect from="/docs" to="/usage" />
+        <Route path="/usage" component={Usage} />
+        <Route component={NotFound} />
       </Switch>
-    </div>;
+    </div>);
   }
 
 }
