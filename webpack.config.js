@@ -6,10 +6,6 @@ var functions = require('postcss-functions');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 
-// var plugins = [
-//     new webpack.NoErrorsPlugin(),
-// ];
-
 // if (process.env.NODE_ENV === 'production') {
 //   plugins = plugins.concat([
 //     new webpack.DefinePlugin({
@@ -52,7 +48,6 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 // };
 
 module.exports = {
-  context: `${__dirname}/src`,
   devtool: 'inline-source-map',
   entry: {
     bundle: path.join(__dirname, 'client/index.js')

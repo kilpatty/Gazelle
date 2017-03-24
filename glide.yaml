@@ -1,6 +1,5 @@
 package: github.com/olebedev/go-starter-kit
 import:
-- package: github.com/codegangsta/cli
 - package: github.com/dop251/goja
 - package: github.com/dop251/goja_nodejs
   subpackages:
@@ -18,3 +17,5 @@ import:
   - fetch
 - package: github.com/olebedev/on
 - package: github.com/jteeuwen/go-bindata
+- package: github.com/urfave/cli
+  version: ^1.19.1
